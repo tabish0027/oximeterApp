@@ -25,6 +25,9 @@ public class Splash extends Activity {
         }, 3000);
     }
 
+
+    
+
     @Override
     protected void onResume() {
         super.onResume();
