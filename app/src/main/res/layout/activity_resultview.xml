@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#000000"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvspo14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/robotolight"
+        android:text="AGE "
+        android:textColor="@color/cardview_light_background"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_result_pulse_rate" />
+
+    <TextView
+        android:id="@+id/tvspo16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Neonate ( 28 days) "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo15" />
+
+    <TextView
+        android:id="@+id/tvspo18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Infant (1 month - 1 year) "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo16" />
+
+    <TextView
+        android:id="@+id/tvspo19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Todler "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo18" />
+
+    <TextView
+        android:id="@+id/tvspo20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Pre-school "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo19" />
+
+    <TextView
+        android:id="@+id/tvspo21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="6-11 years "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo20" />
+
+    <TextView
+        android:id="@+id/tvspo22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="12 years - adult "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo21" />
+
+    <TextView
+        android:id="@+id/tvspo23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Athlete "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo22" />
+
+    <TextView
+        android:id="@+id/tvspo15"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Normal Pulse Rate"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvspo17"
+        app:layout_constraintTop_toTopOf="@+id/tvspo14"
+        android:fontFamily="@font/robotolight" />
+
+    <TextView
+        android:id="@+id/tvspo17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="100 - 205 "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/tvspo24"
+        app:layout_constraintTop_toTopOf="@+id/tvspo16" />
+
+    <TextView
+        android:id="@+id/tvspo26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="80 - 120 "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/tvspo25"
+        app:layout_constraintTop_toTopOf="@+id/tvspo20" />
+
+    <TextView
+        android:id="@+id/tvspo27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="75 - 118 "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/tvspo26"
+        app:layout_constraintTop_toTopOf="@+id/tvspo21" />
+
+    <TextView
+        android:id="@+id/tvspo28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="60 - 100 "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/tvspo27"
+        app:layout_constraintTop_toTopOf="@+id/tvspo22" />
+
+    <TextView
+        android:id="@+id/tvspo29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="40 - 60 "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/tvspo28"
+        app:layout_constraintTop_toTopOf="@+id/tvspo23" />
+
+    <TextView
+        android:id="@+id/tvspo24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/robotolight"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="100 - 190 "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/tvspo18"
+        app:layout_constraintTop_toTopOf="@+id/tvspo18" />
+
+    <TextView
+        android:id="@+id/tvspo25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="98 - 140 "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/tvspo24"
+        app:layout_constraintTop_toTopOf="@+id/tvspo19" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/tvspo11"
+        app:layout_constraintStart_toStartOf="@+id/tvspo11"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo11"></LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_result_spo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:text="SpO2 : 99%"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView15"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/tv_result_pulse_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/robotolight"
+        android:text="SpO2 : 99%"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView15"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <TextView
+        android:id="@+id/tvspo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Normal - Healthy "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_result_spo2" />
+
+    <TextView
+        android:id="@+id/tvspo5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Normal - COPD "
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo3" />
+
+    <TextView
+        android:id="@+id/tvspo6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Hypoxic "
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo5" />
+
+    <TextView
+        android:id="@+id/tvspo7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Severely Hypoxic "
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo6" />
+
+    <TextView
+        android:id="@+id/tvspo11"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:gravity="center"
+        android:text="Trigger: Any drop of 3% or more indicates cause for concern."
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo7" />
+
+    <TextView
+        android:id="@+id/tvspo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/robotolight"
+        android:text=">= 95 "
+        android:textColor="@color/colorRecieveText"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/tvspo3"
+        app:layout_constraintTop_toTopOf="@+id/tvspo3" />
+
+    <TextView
+        android:id="@+id/tvspo8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="88% - 92% "
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/tvspo3"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo4" />
+
+    <TextView
+        android:id="@+id/tvspo9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="85% - 94% "
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/tvspo3"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo8" />
+
+    <TextView
+        android:id="@+id/tvspo10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotolight"
+        android:text="Less Than 85 "
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        android:textStyle="normal|bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/tvspo3"
+        app:layout_constraintTop_toBottomOf="@+id/tvspo9" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:text="Result"
+        android:textColor="#19b5ff"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Back"
+        android:textColor="#19b5ff"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/robotolight" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
