@@ -32,6 +32,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,7 +79,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
     private String newline = "\r\n";
 
     private TextView receiveText;
-    Button start_btn;
+
     private UsbSerialPort usbSerialPort;
     private SerialService service;
     private boolean initialStart = true;
@@ -88,17 +90,19 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
     String pulse="",oxigen="";
 
 
-    CircularProgressBar oxigenProgressBar ;
-    CircularProgressBar pluseProgressBar ;
+    //CircularProgressBar oxigenProgressBar ;
+    //CircularProgressBar pluseProgressBar ;
     private LineChart ecgchart;
-    private TextView txdate,txtime,tvspo2,tvbpm,textView8;
-    private ImageView ivheart;
+    private TextView tvspo2,tvbpm,textView8;
+
+    private ImageView ivheart,ivnoheart;
     Thread thread;
     int oxmin = 100;
     int oxmax = 0;
     int bpmmin = 200;
     int bpmmax = 0;
-    TextView tv_oxmin ,tv_oxmax ,tv_bpmmin,tv_bpmmax;ImageView ivsetting;
+    //TextView tv_oxmin ,txdate,txtime,tv_oxmax ,tv_bpmmin,tv_bpmmax;
+    ImageView ivsetting;
     LinkedList<Integer> pulsedata = new LinkedList<>();
     LinkedList<Integer> oxygendata = new LinkedList<>();
     Boolean threadsStarted = false;
@@ -106,13 +110,13 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
     Boolean manual_Started = false;
     Boolean manual_Data = false;
    // MaterialButton start_btn_pulse = null;
-   CircularProgressButton start_btn_pulse = null;
+   Button start_btn_pulse = null;
     TextView tv_progress;
-
+    Animation Animation1,Animation2,Animation3,Animation4;
     final Handler progresshandler = new Handler();
     Runnable progresshandlerRunnable= null;
-    int progresspulseSet = 30;
-    int progresspulse = 30;
+    int progresspulseSet = 12;
+    int progresspulse = 12;
     public oximeter_activity() {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -169,30 +173,30 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         baudRate = 115200;//getArguments().getInt("baud");
         setContentView(R.layout.oxiboard_activity);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        start_btn = findViewById(R.id.start_btn);
 
 
 
-        start_btn_pulse = (CircularProgressButton) findViewById(R.id.start_btn_pulse);
+
+        start_btn_pulse =  findViewById(R.id.start_btn_pulse);
         tv_progress = findViewById(R.id.tv_progress);
         String data = Integer.toString(deviceId)+"-"+Integer.toString(portNum);
        // Toast.makeText(this,data,Toast.LENGTH_LONG).show();
 
 
-        oxigenProgressBar = findViewById(R.id.oxigen);
-        pluseProgressBar = findViewById(R.id.pluse);
+        //oxigenProgressBar = findViewById(R.id.oxigen);
+        //pluseProgressBar = findViewById(R.id.pluse);
         ecgchart = findViewById(R.id.ecgchart);
 
         ivheart = findViewById(R.id.ivheart);
-
-        txdate = findViewById(R.id.txdate);
-        txtime = findViewById(R.id.txtime);
+        ivnoheart = findViewById(R.id.ivheart2);
+        //txdate = findViewById(R.id.txdate);
+        //txtime = findViewById(R.id.txtime);
         tvspo2 = findViewById(R.id.tvspo2);
         tvbpm = findViewById(R.id.tvbpm);
-        tv_oxmin = findViewById(R.id.oxmin);
-        tv_oxmax = findViewById(R.id.oxmax);
-        tv_bpmmin = findViewById(R.id.bpmmin);
-        tv_bpmmax = findViewById(R.id.bpmmax);
+        //tv_oxmin = findViewById(R.id.oxmin);
+        //tv_oxmax = findViewById(R.id.oxmax);
+        //tv_bpmmin = findViewById(R.id.bpmmin);
+        //tv_bpmmax = findViewById(R.id.bpmmax);
         ivsetting = findViewById(R.id.ivsetting);
 
         int oxmin = 100;
@@ -201,7 +205,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         int bpmmax = 0;
 
 
-
+        /*
         // Set Progress
         oxigenProgressBar.setProgress(0f);
         oxigenProgressBar.setProgressMax(100f);
@@ -229,7 +233,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         pluseProgressBar.setRoundBorder(true);
         pluseProgressBar.setStartAngle(180f);
         pluseProgressBar.setProgressDirection(CircularProgressBar.ProgressDirection.TO_LEFT);
-
+        */
 
         // no description text
         ecgchart.getDescription().setEnabled(false);
@@ -242,22 +246,25 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         // enable scaling and dragging
         ecgchart.setDragEnabled(true);
         ecgchart.setScaleEnabled(false);
-        ecgchart.setDrawGridBackground(false);
-
-        ecgchart.setHighlightPerDragEnabled(true);
-
-        ecgchart.setGridBackgroundColor(Color.TRANSPARENT);
-        // set an alternative background color
+      // moving
+        // ecgchart.setDrawGridBackground(false);
+        ecgchart.setGridBackgroundColor(R.color.theamcolor);
+      //  ecgchart.setHighlightPerDragEnabled(true);
         ecgchart.setBackgroundColor(Color.TRANSPARENT);
         ecgchart.setViewPortOffsets(0f, 0f, 0f, 0f);
-        // get the legend (only possible after setting data)
-        Legend l = ecgchart.getLegend();
+        ecgchart.getAxisLeft().setGridColor(R.color.theamcolor);
+        ecgchart.getAxisRight().setGridColor(R.color.theamcolor);
         ecgchart.getAxisLeft().setDrawGridLines(false);
-        ecgchart.getAxisRight().setDrawGridLines(false);
+         ecgchart.getAxisRight().setDrawGridLines(false);
 
         ecgchart.getXAxis().setDrawGridLines(false);
 
-        ecgchart.getXAxis().setEnabled(false);
+         ecgchart.getXAxis().setEnabled(false);
+        // set an alternative background color
+
+        // get the legend (only possible after setting data)
+        Legend l = ecgchart.getLegend();
+
         ecgchart.setVisibleXRangeMaximum(10);
 
 
@@ -293,7 +300,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         });*/
 
         tv_progress.setVisibility(View.INVISIBLE);
-
+        start_btn_pulse.setText("Start");
         start_btn_pulse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -303,43 +310,140 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
                     oximeter_activity.this.oxmax = 0;
                     oximeter_activity.this.bpmmin = 200;
                     oximeter_activity.this.bpmmax = 0;
-                    start_btn_pulse.startAnimation();
+                    start_btn_pulse.setText("Calculating...");
                     start_btn_pulse.setClickable(true);
                     tv_progress.setText("30 Sec");
                     tv_progress.setVisibility(View.VISIBLE);
                     progresspulse = progresspulseSet;
                     BackBone.getInstance().ResultSPO2 = 0;
                     BackBone.getInstance().ResultPulseRate = 0;
-
                     startManualProcessing();
+
 
                 }else{
                     //start_btn_pulse.revertAnimation();
-                    start_btn_pulse.revertAnimation();
-                    tv_progress.setVisibility(View.INVISIBLE);
 
 
-                    progresshandler.removeCallbacks(progresshandlerRunnable);
-
-
+                    pusePulseRate();
                 }
             }
         });
 
 
        // start_btn_pulse.startAnimation();
+        //Animation1,Animation2,Animation3,Animation4;
 
+        startAnimationPulse();
+       //
+       ivheart.setVisibility(View.GONE);
+        ivnoheart.setVisibility(View.VISIBLE);
+        ivheart.startAnimation(Animation1);
+    }
+    public void pusePulseRate(){
+        tv_progress.setVisibility(View.INVISIBLE);
+        start_btn_pulse.setText("Start");
+        stopPulseAnimation();
+
+        progresshandler.removeCallbacks(progresshandlerRunnable);
 
     }
+    public void startPulseAnimation(){
+        ivheart.setVisibility(View.VISIBLE);
+        ivnoheart.setVisibility(View.INVISIBLE);
+        ivheart.startAnimation(Animation1);
+    }
+    public void stopPulseAnimation(){
+        ivheart.setVisibility(View.GONE);
+        ivnoheart.setVisibility(View.VISIBLE);
+        ivheart.setAnimation(null);
+    }
+    public void startAnimationPulse(){
+        Animation1 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoomanimation1);
+        Animation2 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoomanimation2);
+        Animation3 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoomanimation3);
+        Animation4 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoomanimation4);
+        Animation1.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
 
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ivheart.startAnimation(Animation2);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        Animation2.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                ivheart.startAnimation(Animation3);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        Animation3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ivheart.startAnimation(Animation4);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        Animation4.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                try{
+                    thread.sleep(200);
+                }catch (Exception i){
+
+                }
+                ivheart.startAnimation(Animation1);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+    }
     @Override
     protected void onResume() {
         super.onResume();
         getstate();
-        if(manual_Data)
+        if(manual_Data) {
             start_btn_pulse.setVisibility(View.VISIBLE);
-        else
+            pusePulseRate();
+        }
+        else {
             start_btn_pulse.setVisibility(View.INVISIBLE);
+        }
 
 
         this.bindService(new Intent(this, SerialService.class), this, Context.BIND_AUTO_CREATE);
@@ -417,7 +521,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         return (float) (Math.random() * range) + start;
     }
     public void startManualProcessing(){
-
+        startPulseAnimation();
         progresshandlerRunnable = new Runnable() {
             public void run() {
                 //
@@ -430,14 +534,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
 
                 tv_progress.setText(Integer.toString(progresspulse)+" Sec" );
                 double progresspercentageforcolorchange = progresspulse/(double)progresspulseSet*100.0;
-                if(progresspercentageforcolorchange > 66.00)
-                {
-                    tv_progress.setTextColor(Color.GREEN);
-                }else if (progresspercentageforcolorchange <= 66.00&& progresspercentageforcolorchange >= 33.33){
-                    tv_progress.setTextColor(Color.YELLOW);
-                }else{
-                    tv_progress.setTextColor(Color.RED);
-                }
+                tv_progress.setTextColor(Color.GREEN);
 
                 if(progresspulse == 0){
                     generateResultofpulse();
@@ -452,7 +549,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
     }
     public void generateResultofpulse(){
         progresshandler.removeCallbacks(progresshandlerRunnable);
-        start_btn_pulse.revertAnimation();
+
         tv_progress.setVisibility(View.INVISIBLE);
         manual_Started = !manual_Started;
         Intent resultview = new Intent(this, resultview.class);
@@ -536,15 +633,14 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         if(bpmmax < pulseData && oxigenData!=0){
             bpmmax = (int)pulseData;
         }
-        tv_oxmin.setText(Integer.toString(oxmin)+" %");
-        tv_oxmax.setText(Integer.toString(oxmax)+" %");
-        tv_bpmmin.setText(Integer.toString(bpmmin)+" BPM");
-        tv_bpmmax.setText(Integer.toString(bpmmax)+" BPM");
+        //tv_oxmin.setText(Integer.toString(oxmin)+" %");
+        //tv_oxmax.setText(Integer.toString(oxmax)+" %");
+        //tv_bpmmin.setText(Integer.toString(bpmmin)+" BPM");
+        //tv_bpmmax.setText(Integer.toString(bpmmax)+" BPM");
 
 
 
 
-        heartpulse();
         int avgstablecount = 5;
         if(pulsedata.size() >avgstablecount)
              pulsedata.removeLast();
@@ -569,8 +665,8 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
 
         long delay = 1000;
 
-        oxigenProgressBar.setProgressWithAnimation(progressoxigen, delay); // =1s
-        pluseProgressBar.setProgressWithAnimation(avgprogresspluse, delay);
+        //oxigenProgressBar.setProgressWithAnimation(progressoxigen, delay); // =1s
+        //pluseProgressBar.setProgressWithAnimation(avgprogresspluse, delay);
 
         BackBone.getInstance().ResultPulseRate = avgprogresspluse;
         BackBone.getInstance().ResultSPO2 = progressoxigen;
@@ -579,7 +675,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         addEntry(avgprogresspluse);
         addEntry(avgprogresspluse);
 
-        txtime.setText("");
+        //txtime.setText("");
         if(progressoxigen > 100)
         {
             progressoxigen = 100;
@@ -588,38 +684,26 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         Date today = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
         String dateToStr = format.format(today);
-        txdate.setText(dateToStr);
+        //txdate.setText(dateToStr);
         tvspo2.setText(Integer.toString(progressoxigen)+"%");
         tvbpm.setText((Integer.toString(Math.round(avgprogresspluse))));
-
-    }
-    public void heartpulse(){
         new Thread(new Runnable() {
-
             @Override
             public void run() {
-                runOnUiThread( new Runnable() {
 
-                    @Override
-                    public void run() {
-                        ivheart.setVisibility(View.VISIBLE);
-                    }
-                });
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread( new Runnable() {
 
-                    @Override
-                    public void run() {
-                        ivheart.setVisibility(View.INVISIBLE);
-                    }
-                });
 
             }
-        }).start();;
+        }).start();
+
+    }
+
+    public void heartpulse(){
+
+                ivheart.setVisibility(View.VISIBLE);
+                ivnoheart.setVisibility(View.INVISIBLE);
+
+
 
     }
     @Override

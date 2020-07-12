@@ -9,10 +9,13 @@
     <color name="colorStatusText">#FFDB58</color>
     <color name="metertheam">#19b5ff</color>
 
-    <!--<color name="backgroundcolor">#000000</color>
-    <color name="theamtextcolor">#ffffff</color>-->
+    <color name="backgroundcolor">#ffffff</color>
+    <color name="theamtextcolor">#707070</color>
 
-    <color name="backgroundcolor">#000000</color>
-    <color name="theamtextcolor">#ffffff</color>
+    <color name="theamcolor">#F38475</color>
 
-</resources>
+    <!--
+        <color name="backgroundcolor">#000000</color>
+        <color name="theamtextcolor">#ffffff</color>-->
+
+    </resources>
