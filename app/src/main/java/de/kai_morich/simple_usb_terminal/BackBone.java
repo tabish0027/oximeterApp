@@ -7,7 +7,8 @@ public class BackBone {
 
     public int  ResultPulseRate = 0;
     public int  ResultSPO2 = 0;
-
+    public String  ReviewPulseRate = "0";
+    public String  ReviewSPO2 = "0";
 
     public static BackBone getInstance(){
         if(instance == null)

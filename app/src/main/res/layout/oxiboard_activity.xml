@@ -9,19 +9,139 @@
     android:keepScreenOn="true"
     android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_result_round_border"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="117dp"
+            android:layout_height="27dp"
+            android:fontFamily="@font/robotolight"
+            android:text="Heart Pulse "
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline14"
+            app:layout_constraintStart_toStartOf="@+id/guideline12"
+            app:layout_constraintTop_toTopOf="@+id/guideline14" />
+
+        <TextView
+            android:id="@+id/tv_bpm"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:fontFamily="@font/robotolight"
+            android:gravity="right"
+            android:text="95.5 BPM"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout1"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_result_round_border"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="117dp"
+            android:layout_height="27dp"
+            android:fontFamily="@font/robotolight"
+            android:text="Oxygen Level"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline141"
+            app:layout_constraintStart_toStartOf="@+id/guideline121"
+            app:layout_constraintTop_toTopOf="@+id/guideline141" />
+
+        <TextView
+            android:id="@+id/tv_oxygen"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:fontFamily="@font/robotolight"
+            android:gravity="right"
+            android:text="70 %"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline131"
+            app:layout_constraintTop_toTopOf="@+id/textView1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline131"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline141"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/tv_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/robotolight"
         android:text="0 Sec"
-        android:textColor="@color/theamtextcolor"
+        android:textColor="#F38475"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivsetting"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout1"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/ivsetting" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
     <TextView
         android:id="@+id/tvbpm"
@@ -31,6 +151,7 @@
         android:text="00"
         android:textColor="@color/theamtextcolor"
         android:textSize="50dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/tvspo2" />
@@ -56,6 +177,7 @@
 
         android:textColor="@color/theamtextcolor"
         android:textSize="50dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/ivsetting" />
@@ -75,6 +197,7 @@
         android:text="SPO2"
         android:textColor="#414c5e"
         android:textSize="25dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/tvspo2"
         app:layout_constraintStart_toStartOf="@+id/tvspo2"
         app:layout_constraintTop_toBottomOf="@+id/tvspo2" />
@@ -87,6 +210,7 @@
         android:text="BPM"
         android:textColor="#414c5e"
         android:textSize="25dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/tvbpm"
         app:layout_constraintStart_toStartOf="@+id/tvbpm"
         app:layout_constraintTop_toBottomOf="@+id/tvbpm" />
@@ -95,6 +219,7 @@
         android:id="@+id/ecgchart"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -142,9 +267,20 @@
         android:src="@drawable/pulsefinger" />
 
     <ImageView
+        android:id="@+id/iv_backpulse"
+        android:layout_width="470dp"
+        android:layout_height="401dp"
+        android:src="@drawable/backpulse"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <ImageView
         android:id="@+id/ivheart2"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:src="@drawable/nopulseheart"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -155,13 +291,35 @@
     <ImageView
         android:id="@+id/ivheart"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:src="@drawable/pulseheart"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/start_btn_pulse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:src="@drawable/heartbackground" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+
+        android:background="@drawable/gride"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ecgchart"
+        app:layout_constraintStart_toStartOf="@+id/ecgchart"
+        app:layout_constraintTop_toTopOf="@+id/ecgchart"></LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,12 @@
 
             ></activity>
         <activity
+            android:name="de.kai_morich.simple_usb_terminal.result_detail_view_activity"
+
+            ></activity>
+
+
+        <activity
             android:name="de.kai_morich.simple_usb_terminal.oximeter_activity">
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />

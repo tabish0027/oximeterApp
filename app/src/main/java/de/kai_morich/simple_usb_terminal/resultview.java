@@ -34,8 +34,8 @@ public class resultview extends Activity {
                 resultview.this.finish();
             }
         });
-        tv_result_spo2.setText( Integer.toString(BackBone.getInstance().ResultSPO2) + "%");
-        tv_result_pulse.setText( Integer.toString(BackBone.getInstance().ResultPulseRate) + " bps");
+        tv_result_spo2.setText( (BackBone.getInstance().ReviewSPO2) + "%");
+        tv_result_pulse.setText( (BackBone.getInstance().ReviewPulseRate) + " Bpm");
 
     }
 
