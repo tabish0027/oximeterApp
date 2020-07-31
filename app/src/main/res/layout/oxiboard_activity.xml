@@ -38,7 +38,7 @@
             android:layout_height="27dp"
             android:fontFamily="@font/robotolight"
             android:gravity="right"
-            android:text="95.5 BPM"
+            android:text="0 BPM"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -98,7 +98,7 @@
             android:layout_height="27dp"
             android:fontFamily="@font/robotolight"
             android:gravity="right"
-            android:text="70 %"
+            android:text="0 %"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -136,12 +136,23 @@
         android:fontFamily="@font/robotolight"
         android:text="0 Sec"
         android:textColor="#F38475"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout1"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+
+    <ImageView
+        android:id="@+id/iv_backpulse"
+        android:layout_width="470dp"
+        android:layout_height="401dp"
+        android:src="@drawable/backpulse"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <TextView
         android:id="@+id/tvbpm"
@@ -202,6 +213,17 @@
         app:layout_constraintStart_toStartOf="@+id/tvspo2"
         app:layout_constraintTop_toBottomOf="@+id/tvspo2" />
 
+    <Button
+        android:id="@+id/start_btn_pulse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/startbutton"
+        android:text="Start"
+        app:layout_constraintBottom_toTopOf="@+id/ecgchart"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
@@ -223,17 +245,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/start_btn_pulse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/startbutton"
-        android:text="Start"
-        app:layout_constraintBottom_toTopOf="@+id/ecgchart"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -266,16 +277,20 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         android:src="@drawable/pulsefinger" />
 
-    <ImageView
-        android:id="@+id/iv_backpulse"
-        android:layout_width="470dp"
-        android:layout_height="401dp"
-        android:src="@drawable/backpulse"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+    <TextView
+        android:id="@+id/tv_device_connectecd_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:text="Device Not Connected"
+        android:textColor="#F38475"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/start_btn_pulse"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/ivheart2"
@@ -303,12 +318,13 @@
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
         android:scaleType="fitXY"
+        android:src="@drawable/heartbackground"
         app:layout_constraintBottom_toTopOf="@+id/start_btn_pulse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        android:src="@drawable/heartbackground" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <LinearLayout
         android:layout_width="0dp"

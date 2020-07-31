@@ -78,7 +78,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
     private int deviceId, portNum, baudRate;
     private String newline = "\r\n";
 
-    private TextView receiveText;
+    private TextView receiveText,tv_device_connectecd_status;
     private UsbSerialPort usbSerialPort;
     private SerialService service;
     private boolean initialStart = true;
@@ -87,7 +87,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
     private ControlLines controlLines;
 
     String pulse="",oxigen="";
-
+    Thread timerPulseCheck = null;
 
     //CircularProgressBar oxigenProgressBar ;
     //CircularProgressBar pluseProgressBar ;
@@ -108,6 +108,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
 
     Boolean manual_Started = false;
     Boolean manual_Data = false;
+    Boolean pulse_Animation_Started = false;
    // MaterialButton start_btn_pulse = null;
    Button start_btn_pulse = null;
     TextView tv_progress;
@@ -115,8 +116,11 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
     Animation BackAnimation1,BackAnimation2,BackAnimation3,BackAnimation4;
     final Handler progresshandler = new Handler();
     Runnable progresshandlerRunnable= null;
-    int progresspulseSet = 3;
-    int progresspulse = 3;
+    int progresspulseSet = 30;
+    int progresspulse = 30;
+    public int checkCountDetectValue = 0;
+    public int oldCountDetectValue = -1;
+
     public oximeter_activity() {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -179,6 +183,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
 
         start_btn_pulse =  findViewById(R.id.start_btn_pulse);
         tv_progress = findViewById(R.id.tv_progress);
+        tv_device_connectecd_status = findViewById(R.id.tv_device_connectecd_status);
         String data = Integer.toString(deviceId)+"-"+Integer.toString(portNum);
        // Toast.makeText(this,data,Toast.LENGTH_LONG).show();
 
@@ -353,6 +358,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
 
     }
     public void startPulseAnimation(){
+        pulse_Animation_Started = true;
         ivheart.setVisibility(View.VISIBLE);
         iv_backpulse.setVisibility(View.VISIBLE);
         ivnoheart.setVisibility(View.INVISIBLE);
@@ -360,6 +366,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         iv_backpulse.startAnimation(BackAnimation1);
     }
     public void stopPulseAnimation(){
+        pulse_Animation_Started = false;
         ivheart.setVisibility(View.GONE);
         iv_backpulse.setVisibility(View.GONE);
         ivnoheart.setVisibility(View.VISIBLE);
@@ -520,10 +527,13 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
 
             }
         });
+       // BackBone.getInstance().showMessage(this,"onCreate");
     }
     @Override
     protected void onResume() {
         super.onResume();
+       // BackBone.getInstance().showMessage(this,"onResume");
+
         getstate();
         if(manual_Data) {
             start_btn_pulse.setVisibility(View.VISIBLE);
@@ -573,6 +583,9 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
                     });
 
                     try {
+                        if(i%10==0)
+                            Thread.sleep(5000);
+                        else
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -580,7 +593,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
                 }
             }
         });
-        thread.start();
+       // thread.start();
         new Thread(new Runnable() {
 
             @Override
@@ -595,7 +608,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
                         if(manual_Data )
                             if(!manual_Started)
                                 continue;
-                        addEntry(40);
+                        addEntry(20);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -705,9 +718,12 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
 
     public void setProgress(int progressoxigen,Float progresspluse) {
 
+      //  BackBone.getInstance().showMessage(this,Integer.toString(progressoxigen));
         if(manual_Data )
             if(!manual_Started)
                 return;
+
+
         float pulseData = progresspluse;
         float oxigenData = progressoxigen;
 
@@ -777,15 +793,44 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         //txdate.setText(dateToStr);
         tvspo2.setText(Integer.toString(progressoxigen)+" %");
         tvbpm.setText((Integer.toString(Math.round(avgprogresspluse)))+" BPM");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        checkCountDetectValue ++;
+        if(!manual_Data) {
+            if(!pulse_Animation_Started) {
+                startPulseAnimation();
+                if (timerPulseCheck != null) {
 
+                    timerPulseCheck = null;
+                }
+                timerPulseCheck = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while(true) {
+                            try {
+                                Thread.sleep(2000);
+                            } catch (Exception i) {
 
+                            }
 
+                            if (checkCountDetectValue == oldCountDetectValue ) {
+                                runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        stopPulseAnimation();
+                                    }
+                                });
+                                break;
+                            }
+                            else{
+                                 oldCountDetectValue = checkCountDetectValue;
+                            }
+                        }
+
+                    }
+                });
+                timerPulseCheck.start();
             }
-        }).start();
-
+        }
     }
 
     public void heartpulse(){
@@ -914,7 +959,14 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
                 device = v;
         if(device == null) {
             status("connection failed: device not found");
+            tv_device_connectecd_status.setText("Device Not Connected");
+            tv_device_connectecd_status.setTextColor(Color.RED);
+            disconnect();
             return;
+        }
+        else{
+            tv_device_connectecd_status.setText("Device Connected");
+            tv_device_connectecd_status.setTextColor(Color.GREEN);
         }
         UsbSerialDriver driver = UsbSerialProber.getDefaultProber().probeDevice(device);
         if(driver == null) {
@@ -922,10 +974,12 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
         }
         if(driver == null) {
             status("connection failed: no driver for device");
+            disconnect();
             return;
         }
         if(driver.getPorts().size() < portNum) {
             status("connection failed: not enough ports at device");
+            disconnect();
             return;
         }
         usbSerialPort = driver.getPorts().get(portNum);
@@ -940,6 +994,7 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
                 status("connection failed: permission denied");
             else
                 status("connection failed: open failed");
+            disconnect();
             return;
         }
 
@@ -960,8 +1015,12 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
     private void disconnect() {
         connected = Connected.False;
        // controlLines.stop();
-        service.disconnect();
-        usbSerialPort = null;
+        tv_device_connectecd_status.setText("Device Not Connected");
+        tv_device_connectecd_status.setTextColor(Color.RED);
+        if(usbSerialPort != null) {
+            service.disconnect();
+            usbSerialPort = null;
+        }
     }
 
     private void send(String str) {
@@ -1036,6 +1095,11 @@ public class oximeter_activity extends Activity implements ServiceConnection, Se
 
         connected = Connected.True;
         controlLines.start();
+    }
+
+    @Override
+    public void onSerialDisConnect() {
+        disconnect();
     }
 
     @Override

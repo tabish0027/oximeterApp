@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -62,6 +63,7 @@ public class SerialService extends Service implements SerialListener {
     public void onDestroy() {
         cancelNotification();
         disconnect();
+        Toast.makeText(getApplicationContext(),"connection stoped",1000).show();
         super.onDestroy();
     }
 
@@ -80,13 +82,21 @@ public class SerialService extends Service implements SerialListener {
         connected = true;
     }
 
+    @Override
+    public void onSerialDisConnect() {
+
+    }
+
     public void disconnect() {
         connected = false; // ignore data,errors while disconnecting
         cancelNotification();
+        Toast.makeText(getApplicationContext(),"connection stoped",1000).show();
         if(socket != null) {
             socket.disconnect();
             socket = null;
         }
+        listener.onSerialDisConnect();
+
     }
 
     public void write(byte[] data) throws IOException {

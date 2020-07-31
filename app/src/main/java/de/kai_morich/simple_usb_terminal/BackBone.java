@@ -1,6 +1,9 @@
 package de.kai_morich.simple_usb_terminal;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.widget.Toast;
+
 import com.di.oximeter.R;
 public class BackBone {
     public static BackBone instance = null;
@@ -18,5 +21,9 @@ public class BackBone {
     public  int getColor(){
 
         return Color.rgb(243, 132, 117);
+    }
+    public void showMessage(Context context,String message){
+        Toast.makeText(context,message,300).show();
+
     }
 }

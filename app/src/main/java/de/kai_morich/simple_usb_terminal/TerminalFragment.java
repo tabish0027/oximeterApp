@@ -257,6 +257,11 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         }
     }
 
+    @Override
+    public void onSerialDisConnect() {
+
+    }
+
     private void disconnect() {
         connected = Connected.False;
         controlLines.stop();
